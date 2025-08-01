@@ -356,17 +356,22 @@
             </div>
             
             <div class="relative">
-                <!-- Desktop Layout with Navigation -->
-                <div class="hidden md:flex items-center justify-center">
-                    <button id="prev-project" class="rounded-full w-12 h-12 shadow-lg bg-blue-600 text-white hover:bg-blue-700 border-0 mr-6 lg:mr-8 z-10 flex-shrink-0 flex items-center justify-center transition-colors">
-                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
-                    </button>
-                    
-                    <div class="flex gap-6 lg:gap-8 max-w-5xl overflow-hidden">
-                        <div id="project-slides-desktop" class="flex gap-6 lg:gap-8 transition-transform duration-300">
-                            <!-- Desktop project slides -->
-                        </div>
-                    </div>
+               <!-- Desktop Slider -->
+<div class="hidden md:flex items-center justify-center w-full">
+  <button id="prev-project" class="rounded-full w-12 h-12 bg-blue-600 text-white hover:bg-blue-700 flex items-center justify-center">
+    <i data-lucide="chevron-left" class="w-6 h-6"></i>
+  </button>
+
+  <div class="flex overflow-hidden gap-6 w-full">
+    <div id="project-slides-desktop" class="flex transition-transform duration-300 gap-6 w-full">
+      <!-- slides injected by JS -->
+    </div>
+  </div>
+
+  <button id="next-project" class="rounded-full w-12 h-12 bg-blue-600 text-white hover:bg-blue-700 flex items-center justify-center">
+    <i data-lucide="chevron-right" class="w-6 h-6"></i>
+  </button>
+</div>
                     
                     <button id="next-project" class="rounded-full w-12 h-12 shadow-lg bg-blue-600 text-white hover:bg-blue-700 border-0 ml-6 lg:ml-8 z-10 flex-shrink-0 flex items-center justify-center transition-colors">
                         <i data-lucide="chevron-right" class="w-6 h-6"></i>
