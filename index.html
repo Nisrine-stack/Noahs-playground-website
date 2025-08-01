@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noah's Park & Playgrounds</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href__="style.css">
+</head>
+
+<body class="bg-white">
+    <!-- HEADER -->
+    <header id="main-header" class="bg-white shadow-sm relative z-40">
+        <!-- Top Announcement Bar -->
+        <div class="bg-gray-100 text-gray-600 text-sm">
+            <div class="max-w-screen-2xl mx-auto px-6 py-2 flex justify-between items-center">
+                <p class="hidden md:block">This content is an example of an announcement message that can be enabled on the site when needed</p>
+                <a href__="tel:18772485444" class="flex items-center gap-2 hover:text-blue-600 transition-colors">
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                    <span>Call us: 1(877)248-5444</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="py-4 border-b border-gray-200">
+            <div class="max-w-screen-2xl mx-auto px-6 flex justify-between items-center gap-8">
+                <!-- Logo -->
+                <a href__="#" class="flex-shrink-0">
+                    <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/897f3faeb_HortizontalColorLogo-nowhitebackground.png" alt="Noah's Park & Playgrounds" class="h-16 w-auto">
+                </a>
+
+                <!-- Main Navigation -->
+                <nav class="hidden lg:flex items-center gap-8 text-gray-700 font-medium tracking-wide">
+                    <a href__="#about" class="hover:text-blue-600 transition-colors">ABOUT</a>
+                    <a href__="#services" class="hover:text-blue-600 transition-colors">PRODUCTS</a>
+                    <a href__="#services" class="hover:text-blue-600 transition-colors">SERVICES</a>
+                    <a href__="#projects" class="hover:text-blue-600 transition-colors">PROJECTS</a>
+                </nav>
+
+                <div class="flex-grow"></div>
+
+                <!-- Search, Account, Cart -->
+                <div class="flex items-center gap-4 flex-shrink-0">
+                    <div class="relative hidden md:block">
+                        <input type="search" placeholder="Search products..." class="search-input">
+                        <i data-lucide="search" class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"></i>
+                    </div>
+                    
+                    <a href__="#" class="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                        <span class="hidden xl:block font-medium">Login</span>
+                    </a>
+                    
+                    <div class="w-px h-6 bg-gray-300"></div>
+
+                    <a href__="#" class="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors relative">
+                        <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+                        <span class="hidden xl:block font-medium">Cart/Quote</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Navigation -->
+        <div class="border-b border-gray-200">
+            <nav class="max-w-screen-2xl mx-auto px-6">
+                <ul class="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 py-3">
+                    <li><button data-category="Playgrounds" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Playgrounds</button></li>
+                    <li><button data-category="Parks" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Parks</button></li>
+                    <li><button data-category="Swings" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Swings</button></li>
+                    <li><button data-category="Independent Play" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Independent Play</button></li>
+                    <li><button data-category="Shade Structures" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Shade Structures</button></li>
+                    <li><button data-category="Fitness Structures" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Fitness Structures</button></li>
+                    <li><button data-category="Sports & Games" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Sports & Games</button></li>
+                    <li><button data-category="Site Safety" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Site Safety</button></li>
+                    <li><button data-category="Replacement Parts" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Replacement Parts</button></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Dropdown Menu Container -->
+        <div id="dropdown-menu" class="dropdown-menu">
+            <!-- Content will be injected by JavaScript -->
+        </div>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section id="home">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+                <div 
+                    class="bg-cover bg-center min-h-[300px] lg:min-h-[500px]"
+                    style="background-image: url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1287&q=80')"
+                ></div>
+                <div class="bg-[#0073aa] text-white p-8 md:p-16 flex flex-col justify-center">
+                    <p class="text-sm font-bold tracking-widest uppercase mb-4 text-sky-200">
+                        PRE HEADING: LOREM IPSUM DOLOR SIT AMET
+                    </p>
+                    <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-6">
+                        Providing Quality Park and Playground Equipment at Fair and Reasonable Prices.
+                    </h1>
+                    <p class="mb-8 text-sky-100 leading-relaxed">
+                        From small spring riders, to fully installed custom designed play sites, Noah's Park & Playgrounds is your one-stop-shop for anything park and playground!
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-3 text-lg">Shop Equipment</button>
+                        <button class="border-2 border-white text-white hover:bg-white hover:text-[#0073aa] rounded-full px-8 py-3 text-lg">Download Catalogue</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Packages -->
+        <section id="services" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Playground Packages</h2>
+                    <p class="text-xl text-gray-600">Choose the perfect solution for your community</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-xl p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4">Playground Package</h3>
+                        <p class="text-blue-100 mb-6 leading-relaxed">
+                            Complete playground solutions with professional installation, safety surfacing, and comprehensive warranties for lasting fun.
+                        </p>
+                        <button class="w-full border-2 border-white text-white hover:bg-white hover:text-blue-600 py-2 rounded-md">Learn More</button>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-500 to-green-600 text-white border-0 shadow-xl p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4">Playground Package</h3>
+                        <p class="text-green-100 mb-6 leading-relaxed">
+                            Custom-designed play structures featuring innovative equipment, natural elements, and inclusive accessibility features.
+                        </p>
+                        <button class="w-full border-2 border-white text-white hover:bg-white hover:text-green-600 py-2 rounded-md">Learn More</button>
+                    </div>
+                    <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white border-0 shadow-xl p-8 rounded-lg">
+                        <h3 class="text-2xl font-bold mb-4">Playground Package</h3>
+                        <p class="text-orange-100 mb-6 leading-relaxed">
+                            Premium playground experiences with cutting-edge equipment, themed designs, and comprehensive maintenance programs.
+                        </p>
+                        <button class="w-full border-2 border-white text-white hover:bg-white hover:text-orange-600 py-2 rounded-md">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl transform rotate-3"></div>
+                        <img 
+                            src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500&h=600&fit=crop"
+                            alt="Noah's Play team"
+                            class="relative rounded-3xl shadow-2xl w-full h-96 object-cover"
+                        >
+                    </div>
+                    <div>
+                        <h2 class="text-4xl font-bold text-gray-900 mb-6">From our family to yours.</h2>
+                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                            At Noah's Play, we believe that every child deserves access to safe, engaging, and inspiring play experiences. 
+                            Founded as a family business, we understand the importance of creating spaces where children can learn, grow, 
+                            and build lasting memories.
+                        </p>
+                        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                            With over 15 years of experience in playground design and installation, we've helped hundreds of communities 
+                            across Pennsylvania create the perfect play environments for their children. Our commitment to quality, safety, 
+                            and customer satisfaction drives everything we do.
+                        </p>
+                        <button class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-md">Learn Our Story</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Projects</h2>
+                    <p class="text-xl text-gray-600">See how we've transformed communities across Pennsylvania</p>
+                </div>
+                
+                <div class="relative">
+                    <div class="flex items-center justify-center gap-8">
+                        <button id="prev-project" class="bg-white rounded-full w-12 h-12 shadow-lg flex items-center justify-center text-gray-600 hover:bg-gray-200">
+                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                        </button>
+                        
+                        <div id="project-card" class="max-w-md w-full mx-auto shadow-xl bg-white rounded-lg overflow-hidden">
+                            <!-- Project content will be injected here by JS -->
+                        </div>
+                        
+                        <button id="next-project" class="bg-white rounded-full w-12 h-12 shadow-lg flex items-center justify-center text-gray-600 hover:bg-gray-200">
+                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                    
+                    <div id="project-dots" class="flex justify-center mt-6 gap-2">
+                        <!-- Dots will be injected here by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section class="py-20 bg-gradient-to-r from-green-500 to-green-600 text-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h2 class="text-4xl font-bold mb-6">What can we build together?</h2>
+                        <p class="text-xl text-green-100 mb-8 leading-relaxed">
+                            Every playground tells a story. Let us help you create a space where children can explore, imagine, 
+                            and grow together. From concept to completion, we're here to bring your vision to life.
+                        </p>
+                        <button class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-md">Start Your Project</button>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl transform -rotate-6"></div>
+                        <img 
+                            src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=500&h=400&fit=crop"
+                            alt="Children playing on playground"
+                            class="relative rounded-3xl shadow-2xl w-full h-80 object-cover"
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Hear stories from our customers</h2>
+                    <div class="flex justify-center items-center gap-2 mb-4">
+                        <div class="flex gap-1">
+                            <i data-lucide="star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></i>
+                        </div>
+                        <span class="text-gray-600">5.0 stars from 150+ reviews</span>
+                    </div>
+                    <div class="flex justify-center items-center gap-8 mt-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png" alt="Google" class="h-8 opacity-60">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Facebook_f_logo_%282019%29.svg/100px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" class="h-8 opacity-60">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Yelp_Logo.svg/200px-Yelp_Logo.svg.png" alt="Yelp" class="h-8 opacity-60">
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="shadow-lg p-6 rounded-lg bg-white">
+                        <div class="flex gap-1 mb-4">
+                             <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                             <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                             <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                             <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                             <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        </div>
+                        <p class="text-gray-700 mb-4 italic">"Noah's Play transformed our community park into something truly special. The attention to detail and quality of work exceeded our expectations."</p>
+                        <div>
+                            <p class="font-semibold text-gray-900">Sarah Johnson</p>
+                            <p class="text-sm text-gray-600">Parks Director</p>
+                        </div>
+                    </div>
+                    <div class="shadow-lg p-6 rounded-lg bg-white">
+                        <div class="flex gap-1 mb-4">
+                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        </div>
+                        <p class="text-gray-700 mb-4 italic">"Professional, reliable, and creative. They listened to our needs and delivered a playground that our students absolutely love."</p>
+                        <div>
+                            <p class="font-semibold text-gray-900">Mike Chen</p>
+                            <p class="text-sm text-gray-600">School Principal</p>
+                        </div>
+                    </div>
+                     <div class="shadow-lg p-6 rounded-lg bg-white">
+                        <div class="flex gap-1 mb-4">
+                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
+                        </div>
+                        <p class="text-gray-700 mb-4 italic">"The playground they built in our neighborhood is amazing. My kids play there every day and I feel completely confident in its safety."</p>
+                        <div>
+                            <p class="font-semibold text-gray-900">Lisa Martinez</p>
+                            <p class="text-sm text-gray-600">Parent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-200">
+        <div class="bg-gray-100 border-b border-gray-200 py-8">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
+                    <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
+                        <i data-lucide="phone" class="w-8 h-8 text-[#0073aa]"></i>
+                        <div>
+                            <h3 class="font-bold text-[#0073aa] text-lg">CALL US</h3>
+                            <p class="text-sm text-gray-600">We are here to help</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
+                        <i data-lucide="mail" class="w-8 h-8 text-[#0073aa]"></i>
+                        <div>
+                            <h3 class="font-bold text-[#0073aa] text-lg">EMAIL US</h3>
+                            <p class="text-sm text-gray-600">info@noahsplay.com</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
+                        <i data-lucide="message-circle" class="w-8 h-8 text-[#0073aa]"></i>
+                        <div>
+                            <h3 class="font-bold text-[#0073aa] text-lg">CONTACT US</h3>
+                            <p class="text-sm text-gray-600">Send us a Message on Our Website</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="py-12 bg-white">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-4 gap-8 text-sm">
+                    <div>
+                        <h3 class="font-bold text-[#0073aa] text-base mb-4">Noah's Info</h3>
+                        <div class="space-y-4 text-gray-700">
+                            <div>
+                                <p>T: 877-248-54444</p>
+                                <p>F: 405-607-0624</p>
+                            </div>
+                            <div>
+                                <p>info@noahsplay.com</p>
+                                <p>Noah's Park & Playgrounds, LLC</p>
+                                <p>Edmond, OK 73013</p>
+                            </div>
+                            <div class="space-y-2 pt-2">
+                                <p class="hover:text-[#0073aa] cursor-pointer">About Us</p>
+                                <p class="hover:text-[#0073aa] cursor-pointer">Work With Us</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-[#0073aa] text-base mb-4">Noah's Store</h3>
+                        <div class="space-y-2 text-gray-700">
+                            <p class="hover:text-[#0073aa] cursor-pointer">Products</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Brands</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Color Tool</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Purchasing Process</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Financing</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Warranties</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Your Privacy</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Shipment</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">FAQ</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-[#0073aa] text-base mb-4">Noah's Work</h3>
+                        <div class="space-y-2 text-gray-700">
+                            <p class="hover:text-[#0073aa] cursor-pointer">Portfolio</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Services</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Design Help</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Installations</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Blog</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Testimonials</p>
+                            <p class="hover:text-[#0073aa] cursor-pointer">Grant Opportunities</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-[#0073aa] text-base mb-4">Free Catalogue</h3>
+                        <div class="space-y-2">
+                            <button class="w-full bg-[#0073aa] hover:bg-sky-700 text-white rounded-full text-xs px-4 py-2 h-auto">
+                                Request a Digital Catalog Packet
+                            </button>
+                            <button class="w-full bg-[#0073aa] hover:bg-sky-700 text-white rounded-full text-xs px-4 py-2 h-auto">
+                                View Noah's Digital Catalog
+                            </button>
+                            <div class="flex items-center justify-start gap-4 pt-4">
+                                <img src="https://i.imgur.com/eBwG1P9.png" alt="ASTM Certified" class="h-8">
+                                <img src="https://i.imgur.com/hYdYgYf.png" alt="Certified Playground Safety Inspector" class="h-8">
+                                <img src="https://i.imgur.com/nJbQfXp.png" alt="NPCAI Member" class="h-8">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-[#0073aa] text-white py-4">
+            <div class="max-w-7xl mx-auto px-6 text-center text-xs">
+                <p>&copy; 2025 Noahs Park and Playgrounds | info@noahsplay.com | Sitemap</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Link to your JavaScript file -->
+    <script src="main.js"></script>
+</body>
+</html>
