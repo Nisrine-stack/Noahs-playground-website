@@ -348,92 +348,157 @@
         </div>
     </section>
 
-    <!-- Projects Section with Slider -->
-    <section id="projects" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="text-center mb-12 lg:mb-16">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 mb-4" style="font-family: 'Comic Sans MS', cursive">Our Projects</h2>
-            </div>
-            
-            <div class="relative">
-               <!-- Desktop Slider -->
-<div class="hidden md:flex items-center justify-center w-full">
-  <button id="prev-project" class="rounded-full w-12 h-12 bg-blue-600 text-white hover:bg-blue-700 flex items-center justify-center">
-    <i data-lucide="chevron-left" class="w-6 h-6"></i>
-  </button>
+<!-- Projects Section -->
+<section id="projects" class="py-12 sm:py-16 lg:py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="text-center mb-12 lg:mb-16">
+      <h2
+        class="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 mb-4"
+        style="font-family: 'Comic Sans MS', cursive"
+      >
+        Our Projects
+      </h2>
+    </div>
 
-  <div class="flex overflow-hidden gap-6 w-full">
-    <div id="project-slides-desktop" class="flex transition-transform duration-300 gap-6 w-full">
-      <!-- slides injected by JS -->
+    <div class="relative">
+      <!-- Desktop Slider -->
+      <div class="hidden md:flex items-center justify-center w-full">
+        <button
+          id="prev-project"
+          class="rounded-full w-12 h-12 bg-blue-600 text-white hover:bg-blue-700 flex items-center justify-center"
+        >
+          <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+
+        <div class="flex overflow-hidden gap-6 w-full mx-4">
+          <div
+            id="project-slides-desktop"
+            class="flex gap-6 transition-transform duration-300"
+          >
+            <!-- Slides injected here -->
+          </div>
+        </div>
+
+        <button
+          id="next-project"
+          class="rounded-full w-12 h-12 bg-blue-600 text-white hover:bg-blue-700 flex items-center justify-center"
+        >
+          <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <!-- Mobile Slider (unchanged) -->
+      <div class="md:hidden">
+        <div class="relative">
+          <div
+            class="flex overflow-x-auto mobile-projects-scroll snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4"
+            style="scroll-padding-left: 1rem;"
+          >
+            <!-- your existing mobile markup… -->
+          </div>
+          <div class="flex justify-center gap-2 mt-6">
+            <div class="w-2 h-2 rounded-full bg-blue-600"></div>
+            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</section>
 
-  <button id="next-project" class="rounded-full w-12 h-12 bg-blue-600 text-white hover:bg-blue-700 flex items-center justify-center">
-    <i data-lucide="chevron-right" class="w-6 h-6"></i>
-  </button>
-</div>
-                    
-                    <button id="next-project" class="rounded-full w-12 h-12 shadow-lg bg-blue-600 text-white hover:bg-blue-700 border-0 ml-6 lg:ml-8 z-10 flex-shrink-0 flex items-center justify-center transition-colors">
-                        <i data-lucide="chevron-right" class="w-6 h-6"></i>
-                    </button>
-                </div>
+<script>
+  // your same lucide init
+  lucide.createIcons();
 
-                <!-- Mobile Layout -->
-                <div class="md:hidden">
-                    <div class="relative">
-                        <div class="flex overflow-x-auto mobile-projects-scroll snap-x snap-mandatory gap-4 pb-4 -mx-4 px-4" style="scroll-padding-left: 1rem;">
-                            <div class="snap-start flex-shrink-0 w-[85%] sm:w-[75%]">
-                                <div class="bg-blue-50 rounded-2xl p-4 sm:p-6 shadow-lg h-full flex flex-col">
-                                    <div class="mb-4">
-                                        <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">Elementary</span>
-                                    </div>
-                                    <div class="mb-4 rounded-xl overflow-hidden">
-                                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=250&fit=crop" alt="Project" class="w-full h-40 sm:h-48 object-cover"/>
-                                    </div>
-                                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mb-3 leading-tight">Angie Debo Elementary School Playground Project</h3>
-                                    <p class="text-gray-600 text-sm mb-4 leading-relaxed flex-grow">Custom ADA Accessible Play Structure in purple, teal and pacific blue.</p>
-                                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full font-semibold text-sm mt-auto transition-colors">Learn More</button>
-                                </div>
-                            </div>
-                            <div class="snap-start flex-shrink-0 w-[85%] sm:w-[75%]">
-                                <div class="bg-blue-50 rounded-2xl p-4 sm:p-6 shadow-lg h-full flex flex-col">
-                                    <div class="mb-4">
-                                        <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">City Parks</span>
-                                    </div>
-                                    <div class="mb-4 rounded-xl overflow-hidden">
-                                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=250&fit=crop" alt="Project" class="w-full h-40 sm:h-48 object-cover"/>
-                                    </div>
-                                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mb-3 leading-tight">Basilio Villareal Park - Rio Grande City Park Project</h3>
-                                    <p class="text-gray-600 text-sm mb-4 leading-relaxed flex-grow">Bleachers and seating solutions with chainlink guardrails.</p>
-                                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full font-semibold text-sm mt-auto transition-colors">Learn More</button>
-                                </div>
-                            </div>
-                            <div class="snap-start flex-shrink-0 w-[85%] sm:w-[75%]">
-                                <div class="bg-blue-50 rounded-2xl p-4 sm:p-6 shadow-lg h-full flex flex-col">
-                                    <div class="mb-4">
-                                        <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">Community</span>
-                                    </div>
-                                    <div class="mb-4 rounded-xl overflow-hidden">
-                                        <img src="https://images.unsplash.com/photo-1541740242-0e60489f3c75?w=400&h=250&fit=crop" alt="Project" class="w-full h-40 sm:h-48 object-cover"/>
-                                    </div>
-                                    <h3 class="text-base sm:text-lg font-bold text-gray-800 mb-3 leading-tight">Westtown Community Park Upgrade</h3>
-                                    <p class="text-gray-600 text-sm mb-4 leading-relaxed flex-grow">Complete playground renovation featuring inclusive play elements.</p>
-                                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full font-semibold text-sm mt-auto transition-colors">Learn More</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Mobile scroll indicators -->
-                        <div class="flex justify-center gap-2 mt-6">
-                            <div class="w-2 h-2 rounded-full bg-blue-600"></div>
-                            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
-                            <div class="w-2 h-2 rounded-full bg-gray-300"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  // Projects data
+  const projects = [
+    {
+      title: "Angie Debo Elementary School Playground Project",
+      category: "Elementary",
+      description:
+        "Custom ADA Accessible Play Structure in purple, teal and pacific blue. Structure components include 2 ADA ramps and stations with tic-tac-toe panel, clock panel and 2 bubble panel",
+      image:
+        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=250&fit=crop",
+    },
+    {
+      title: "Basilio Villareal Park - Rio Grande City Park Project",
+      category: "City Parks",
+      description:
+        "Bleachers- (2) 5 row bleachers with 15\" non-elevated bleachers with chainlink guardrails, (5) 8 row bleachers with chainlink guardrails. Seating capacity 58 + 2 ADA, (2) 10 row bleacher with chainl...",
+      image:
+        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=250&fit=crop",
+    },
+    {
+      title: "Westtown Community Park Upgrade",
+      category: "Community",
+      description:
+        "Complete playground renovation featuring inclusive play elements, safety surfacing upgrades, and accessible pathways for children of all abilities to enjoy together.",
+      image:
+        "https://images.unsplash.com/photo-1541740242-0e60489f3c75?w=400&h=250&fit=crop",
+    },
+  ];
+
+  let currentProject = 0;
+
+  function createProjectSlide(p) {
+    return `
+      <div class="
+        bg-blue-50 rounded-2xl p-6 lg:p-8 shadow-lg
+        flex-shrink-0
+        basis-full       /* 100% on narrow, but hidden under md */
+        md:basis-1/2     /* 50% at ≥768px */
+        lg:basis-1/3     /* 33% at ≥1024px (optional) */
+      ">
+        <div class="mb-4">
+          <span class="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+            ${p.category}
+          </span>
         </div>
-    </section>
+        <div class="mb-6 rounded-xl overflow-hidden">
+          <img src="${p.image}" alt="${p.title}" class="w-full h-48 object-cover"/>
+        </div>
+        <h3 class="text-lg lg:text-xl font-bold text-gray-800 mb-4 leading-tight">
+          ${p.title}
+        </h3>
+        <p class="text-gray-600 text-sm mb-6 leading-relaxed">
+          ${p.description}
+        </p>
+        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition-colors">
+          Learn More
+        </button>
+      </div>
+    `;
+  }
+
+  function updateProjectSlider() {
+    const container = document.getElementById("project-slides-desktop");
+    // show two slides at a time: current and next
+    const first  = projects[currentProject];
+    const second = projects[(currentProject + 1) % projects.length];
+    container.innerHTML =
+      createProjectSlide(first) + createProjectSlide(second);
+  }
+
+  document
+    .getElementById("next-project")
+    .addEventListener("click", () => {
+      currentProject = (currentProject + 1) % projects.length;
+      updateProjectSlider();
+    });
+
+  document
+    .getElementById("prev-project")
+    .addEventListener("click", () => {
+      currentProject = (currentProject - 1 + projects.length) % projects.length;
+      updateProjectSlider();
+    });
+
+  // init
+  updateProjectSlider();
+  // re-draw icons after slide injection
+  setTimeout(() => lucide.createIcons(), 50);
+</script>
 
     <!-- Community Section -->
     <section class="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-green-500 to-green-600 text-white">
