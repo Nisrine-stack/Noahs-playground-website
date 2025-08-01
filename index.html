@@ -4,21 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noah's Park & Playgrounds</title>
-    <!-- Tailwind CSS CDN -->
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons CDN -->
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    <!-- Link to your CSS file -->
-    <link rel="stylesheet" href__="style.css">
+    
+    <style>
+        /* Custom styles for animations and hover effects */
+        .transition-all { transition: all 0.3s ease-in-out; }
+        .hover-lift:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .dropdown { 
+            display: none; 
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .dropdown.active { 
+            display: block; 
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .category-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -13px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #2563eb;
+        }
+        .project-slide {
+            display: none;
+        }
+        .project-slide.active {
+            display: flex;
+        }
+        .star-filled {
+            color: #fbbf24;
+            fill: #fbbf24;
+        }
+    </style>
 </head>
-
-<body class="bg-white">
-    <!-- HEADER -->
-    <header id="main-header" class="bg-white shadow-sm relative z-40">
-        <!-- Top Announcement Bar -->
+<body class="min-h-screen bg-white">
+    <!-- Header -->
+    <header class="bg-white shadow-sm relative z-50" id="main-header">
+        <!-- Top announcement bar -->
         <div class="bg-gray-100 text-gray-600 text-sm">
             <div class="max-w-screen-2xl mx-auto px-6 py-2 flex justify-between items-center">
-                <p class="hidden md:block">This content is an example of an announcement message that can be enabled on the site when needed</p>
+                <p class="hidden md:block">This content is an example of an announcement message</p>
                 <a href__="tel:18772485444" class="flex items-center gap-2 hover:text-blue-600 transition-colors">
                     <i data-lucide="phone" class="w-4 h-4"></i>
                     <span>Call us: 1(877)248-5444</span>
@@ -26,305 +60,375 @@
             </div>
         </div>
 
-        <!-- Main Header -->
+        <!-- Main header -->
         <div class="py-4 border-b border-gray-200">
             <div class="max-w-screen-2xl mx-auto px-6 flex justify-between items-center gap-8">
-                <!-- Logo -->
                 <a href__="#" class="flex-shrink-0">
-                    <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/897f3faeb_HortizontalColorLogo-nowhitebackground.png" alt="Noah's Park & Playgrounds" class="h-16 w-auto">
+                    <img src="https://qtrypzzcjebvfcihiynt.supabase.co/storage/v1/object/public/base44-prod/public/897f3faeb_HortizontalColorLogo-nowhitebackground.png" alt="Noah's Park & Playgrounds" class="h-12 md:h-16 w-auto"/>
                 </a>
-
-                <!-- Main Navigation -->
                 <nav class="hidden lg:flex items-center gap-8 text-gray-700 font-medium tracking-wide">
                     <a href__="#about" class="hover:text-blue-600 transition-colors">ABOUT</a>
                     <a href__="#services" class="hover:text-blue-600 transition-colors">PRODUCTS</a>
                     <a href__="#services" class="hover:text-blue-600 transition-colors">SERVICES</a>
                     <a href__="#projects" class="hover:text-blue-600 transition-colors">PROJECTS</a>
                 </nav>
-
                 <div class="flex-grow"></div>
-
-                <!-- Search, Account, Cart -->
-                <div class="flex items-center gap-4 flex-shrink-0">
-                    <div class="relative hidden md:block">
-                        <input type="search" placeholder="Search products..." class="search-input">
-                        <i data-lucide="search" class="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500"></i>
+                <div class="hidden md:flex items-center gap-4 flex-shrink-0">
+                    <div class="relative">
+                        <input type="search" placeholder="Search products..." class="rounded-full pl-4 pr-10 py-2 w-64 border border-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none"/>
+                        <i data-lucide="search" class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500"></i>
                     </div>
-                    
                     <a href__="#" class="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors">
                         <i data-lucide="user" class="w-5 h-5"></i>
                         <span class="hidden xl:block font-medium">Login</span>
                     </a>
-                    
                     <div class="w-px h-6 bg-gray-300"></div>
-
                     <a href__="#" class="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors relative">
                         <i data-lucide="shopping-cart" class="w-5 h-5"></i>
                         <span class="hidden xl:block font-medium">Cart/Quote</span>
                     </a>
                 </div>
+                <button class="md:hidden p-2" id="mobile-menu-toggle">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
             </div>
         </div>
 
-        <!-- Category Navigation -->
-        <div class="border-b border-gray-200">
+        <!-- Desktop category navigation -->
+        <div class="hidden md:block border-b border-gray-200">
             <nav class="max-w-screen-2xl mx-auto px-6">
                 <ul class="flex flex-wrap justify-center items-center gap-x-8 gap-y-2 py-3">
-                    <li><button data-category="Playgrounds" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Playgrounds</button></li>
-                    <li><button data-category="Parks" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Parks</button></li>
-                    <li><button data-category="Swings" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Swings</button></li>
-                    <li><button data-category="Independent Play" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Independent Play</button></li>
-                    <li><button data-category="Shade Structures" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Shade Structures</button></li>
-                    <li><button data-category="Fitness Structures" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Fitness Structures</button></li>
-                    <li><button data-category="Sports & Games" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Sports & Games</button></li>
-                    <li><button data-category="Site Safety" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Site Safety</button></li>
-                    <li><button data-category="Replacement Parts" class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium">Replacement Parts</button></li>
+                    <li><button class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium active" data-category="Playgrounds">Playgrounds</button></li>
+                    <li><button class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium" data-category="Parks">Parks</button></li>
+                    <li><button class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium" data-category="Swings">Swings</button></li>
+                    <li><button class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium" data-category="Independent Play">Independent Play</button></li>
+                    <li><button class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium" data-category="Shade Structures">Shade Structures</button></li>
+                    <li><button class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium" data-category="Fitness Structures">Fitness Structures</button></li>
+                    <li><button class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium" data-category="Sports & Games">Sports & Games</button></li>
+                    <li><button class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium" data-category="Site Safety">Site Safety</button></li>
+                    <li><button class="category-btn text-gray-700 hover:text-blue-600 py-1 transition-colors relative font-medium" data-category="Replacement Parts">Replacement Parts</button></li>
                 </ul>
             </nav>
         </div>
 
-        <!-- Dropdown Menu Container -->
-        <div id="dropdown-menu" class="dropdown-menu">
-            <!-- Content will be injected by JavaScript -->
+        <!-- Desktop dropdown menu -->
+        <div id="category-dropdown" class="dropdown hidden md:block absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-xl z-40">
+            <div class="max-w-screen-2xl mx-auto px-6 py-8">
+                <div class="grid grid-cols-12 gap-8">
+                    <div class="col-span-4">
+                        <h3 id="dropdown-title" class="text-xl font-bold text-blue-600 mb-6">Playgrounds</h3>
+                        <div id="dropdown-categories" class="grid grid-cols-1 gap-6">
+                            <!-- Categories will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="col-span-8">
+                        <div class="text-right mb-4">
+                            <a href__="#" class="text-sm text-blue-600 hover:text-blue-800 font-bold">View All Products</a>
+                        </div>
+                        <div id="dropdown-products" class="grid grid-cols-2 gap-6">
+                            <!-- Products will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main id="main-content">
-        <!-- Hero Section -->
-        <section id="home">
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div 
-                    class="bg-cover bg-center min-h-[300px] lg:min-h-[500px]"
-                    style="background-image: url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1287&q=80')"
-                ></div>
-                <div class="bg-[#0073aa] text-white p-8 md:p-16 flex flex-col justify-center">
-                    <p class="text-sm font-bold tracking-widest uppercase mb-4 text-sky-200">
-                        PRE HEADING: LOREM IPSUM DOLOR SIT AMET
+    <!-- Hero Section -->
+    <section id="home">
+        <div class="grid grid-cols-1 lg:grid-cols-2">
+            <div 
+                class="bg-cover bg-center min-h-[300px] lg:min-h-[500px]"
+                style="background-image: url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1287&q=80')"
+            >
+            </div>
+            <div class="bg-blue-700 text-white p-8 md:p-16 flex flex-col justify-center">
+                <p class="text-sm font-bold tracking-widest uppercase mb-4 text-sky-200">
+                    PRE HEADING: LOREM IPSUM DOLOR SIT AMET
+                </p>
+                <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-6">
+                    Providing Quality Park and Playground Equipment at Fair and Reasonable Prices.
+                </h1>
+                <p class="mb-8 text-sky-100 leading-relaxed">
+                    From small spring riders, to fully installed custom designed play sites, Noah's Park & Playgrounds is your one-stop-shop for anything park and playground!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button class="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-3 font-semibold transition-colors">
+                        Shop Equipment
+                    </button>
+                    <button class="border-2 border-white text-white hover:bg-white hover:text-blue-700 rounded-full px-8 py-3 font-semibold transition-all">
+                        Download Catalogue
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Packages -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Playground Packages</h2>
+                <p class="text-xl text-gray-600">Choose the perfect solution for your community</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-xl rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-4">Playground Package</h3>
+                    <p class="text-blue-100 mb-6 leading-relaxed">
+                        Complete playground solutions with professional installation, safety surfacing, and comprehensive warranties for lasting fun.
                     </p>
-                    <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-6">
-                        Providing Quality Park and Playground Equipment at Fair and Reasonable Prices.
-                    </h1>
-                    <p class="mb-8 text-sky-100 leading-relaxed">
-                        From small spring riders, to fully installed custom designed play sites, Noah's Park & Playgrounds is your one-stop-shop for anything park and playground!
+                    <button class="w-full border-2 border-white text-white hover:bg-white hover:text-blue-600 rounded py-2 font-semibold transition-all">
+                        Learn More
+                    </button>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white border-0 shadow-xl rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-4">Playground Package</h3>
+                    <p class="text-green-100 mb-6 leading-relaxed">
+                        Custom-designed play structures featuring innovative equipment, natural elements, and inclusive accessibility features.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="bg-orange-500 hover:bg-orange-600 text-white rounded-full px-8 py-3 text-lg">Shop Equipment</button>
-                        <button class="border-2 border-white text-white hover:bg-white hover:text-[#0073aa] rounded-full px-8 py-3 text-lg">Download Catalogue</button>
-                    </div>
+                    <button class="w-full border-2 border-white text-white hover:bg-white hover:text-green-600 rounded py-2 font-semibold transition-all">
+                        Learn More
+                    </button>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white border-0 shadow-xl rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-4">Playground Package</h3>
+                    <p class="text-orange-100 mb-6 leading-relaxed">
+                        Premium playground experiences with cutting-edge equipment, themed designs, and comprehensive maintenance programs.
+                    </p>
+                    <button class="w-full border-2 border-white text-white hover:bg-white hover:text-orange-600 rounded py-2 font-semibold transition-all">
+                        Learn More
+                    </button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Service Packages -->
-        <section id="services" class="py-20 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Playground Packages</h2>
-                    <p class="text-xl text-gray-600">Choose the perfect solution for your community</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-xl p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-4">Playground Package</h3>
-                        <p class="text-blue-100 mb-6 leading-relaxed">
-                            Complete playground solutions with professional installation, safety surfacing, and comprehensive warranties for lasting fun.
-                        </p>
-                        <button class="w-full border-2 border-white text-white hover:bg-white hover:text-blue-600 py-2 rounded-md">Learn More</button>
-                    </div>
-                    <div class="bg-gradient-to-br from-green-500 to-green-600 text-white border-0 shadow-xl p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-4">Playground Package</h3>
-                        <p class="text-green-100 mb-6 leading-relaxed">
-                            Custom-designed play structures featuring innovative equipment, natural elements, and inclusive accessibility features.
-                        </p>
-                        <button class="w-full border-2 border-white text-white hover:bg-white hover:text-green-600 py-2 rounded-md">Learn More</button>
-                    </div>
-                    <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white border-0 shadow-xl p-8 rounded-lg">
-                        <h3 class="text-2xl font-bold mb-4">Playground Package</h3>
-                        <p class="text-orange-100 mb-6 leading-relaxed">
-                            Premium playground experiences with cutting-edge equipment, themed designs, and comprehensive maintenance programs.
-                        </p>
-                        <button class="w-full border-2 border-white text-white hover:bg-white hover:text-orange-600 py-2 rounded-md">Learn More</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl transform rotate-3"></div>
-                        <img 
-                            src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500&h=600&fit=crop"
-                            alt="Noah's Play team"
-                            class="relative rounded-3xl shadow-2xl w-full h-96 object-cover"
-                        >
-                    </div>
-                    <div>
-                        <h2 class="text-4xl font-bold text-gray-900 mb-6">From our family to yours.</h2>
-                        <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                            At Noah's Play, we believe that every child deserves access to safe, engaging, and inspiring play experiences. 
-                            Founded as a family business, we understand the importance of creating spaces where children can learn, grow, 
-                            and build lasting memories.
-                        </p>
-                        <p class="text-lg text-gray-700 mb-8 leading-relaxed">
-                            With over 15 years of experience in playground design and installation, we've helped hundreds of communities 
-                            across Pennsylvania create the perfect play environments for their children. Our commitment to quality, safety, 
-                            and customer satisfaction drives everything we do.
-                        </p>
-                        <button class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-md">Learn Our Story</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="py-20 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Projects</h2>
-                    <p class="text-xl text-gray-600">See how we've transformed communities across Pennsylvania</p>
-                </div>
-                
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="relative">
-                    <div class="flex items-center justify-center gap-8">
-                        <button id="prev-project" class="bg-white rounded-full w-12 h-12 shadow-lg flex items-center justify-center text-gray-600 hover:bg-gray-200">
-                            <i data-lucide="chevron-left" class="w-6 h-6"></i>
-                        </button>
-                        
-                        <div id="project-card" class="max-w-md w-full mx-auto shadow-xl bg-white rounded-lg overflow-hidden">
-                            <!-- Project content will be injected here by JS -->
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-3xl transform rotate-3"></div>
+                    <img 
+                        src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=500&h=600&fit=crop"
+                        alt="Noah's Play team"
+                        class="relative rounded-3xl shadow-2xl w-full h-96 object-cover"
+                    />
+                </div>
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">From our family to yours.</h2>
+                    <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                        At Noah's Play, we believe that every child deserves access to safe, engaging, and inspiring play experiences. 
+                        Founded as a family business, we understand the importance of creating spaces where children can learn, grow, 
+                        and build lasting memories.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                        With over 15 years of experience in playground design and installation, we've helped hundreds of communities 
+                        across Pennsylvania create the perfect play environments for their children. Our commitment to quality, safety, 
+                        and customer satisfaction drives everything we do.
+                    </p>
+                    <button class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded font-semibold transition-colors">
+                        Learn Our Story
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section with Slider -->
+    <section id="projects" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 overflow-hidden">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-blue-600 mb-4" style="font-family: 'Comic Sans MS', cursive">Our Projects</h2>
+            </div>
+            
+            <div class="relative">
+                <!-- Desktop Layout with Navigation -->
+                <div class="hidden md:flex items-center justify-center">
+                    <button id="prev-project" class="rounded-full w-12 h-12 shadow-lg bg-blue-600 text-white hover:bg-blue-700 border-0 mr-8 z-10 flex-shrink-0 flex items-center justify-center transition-colors">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    
+                    <div class="flex gap-8 max-w-5xl">
+                        <!-- Project slides will be populated by JavaScript -->
+                        <div id="project-slides-desktop" class="flex gap-8">
+                            <!-- Desktop project slides -->
                         </div>
-                        
-                        <button id="next-project" class="bg-white rounded-full w-12 h-12 shadow-lg flex items-center justify-center text-gray-600 hover:bg-gray-200">
-                            <i data-lucide="chevron-right" class="w-6 h-6"></i>
-                        </button>
                     </div>
                     
-                    <div id="project-dots" class="flex justify-center mt-6 gap-2">
-                        <!-- Dots will be injected here by JS -->
-                    </div>
+                    <button id="next-project" class="rounded-full w-12 h-12 shadow-lg bg-blue-600 text-white hover:bg-blue-700 border-0 ml-8 z-10 flex-shrink-0 flex items-center justify-center transition-colors">
+                        <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                    </button>
                 </div>
-            </div>
-        </section>
 
-        <!-- Community Section -->
-        <section class="py-20 bg-gradient-to-r from-green-500 to-green-600 text-white">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="grid lg:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <h2 class="text-4xl font-bold mb-6">What can we build together?</h2>
-                        <p class="text-xl text-green-100 mb-8 leading-relaxed">
-                            Every playground tells a story. Let us help you create a space where children can explore, imagine, 
-                            and grow together. From concept to completion, we're here to bring your vision to life.
-                        </p>
-                        <button class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-md">Start Your Project</button>
-                    </div>
+                <!-- Mobile Layout -->
+                <div class="md:hidden">
                     <div class="relative">
-                        <div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl transform -rotate-6"></div>
-                        <img 
-                            src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=500&h=400&fit=crop"
-                            alt="Children playing on playground"
-                            class="relative rounded-3xl shadow-2xl w-full h-80 object-cover"
-                        >
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials -->
-        <section class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Hear stories from our customers</h2>
-                    <div class="flex justify-center items-center gap-2 mb-4">
-                        <div class="flex gap-1">
-                            <i data-lucide="star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-5 h-5 fill-yellow-400 text-yellow-400"></i>
-                        </div>
-                        <span class="text-gray-600">5.0 stars from 150+ reviews</span>
-                    </div>
-                    <div class="flex justify-center items-center gap-8 mt-8">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png" alt="Google" class="h-8 opacity-60">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Facebook_f_logo_%282019%29.svg/100px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" class="h-8 opacity-60">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Yelp_Logo.svg/200px-Yelp_Logo.svg.png" alt="Yelp" class="h-8 opacity-60">
-                    </div>
-                </div>
-                
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="shadow-lg p-6 rounded-lg bg-white">
-                        <div class="flex gap-1 mb-4">
-                             <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                             <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                             <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                             <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                             <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                        </div>
-                        <p class="text-gray-700 mb-4 italic">"Noah's Play transformed our community park into something truly special. The attention to detail and quality of work exceeded our expectations."</p>
-                        <div>
-                            <p class="font-semibold text-gray-900">Sarah Johnson</p>
-                            <p class="text-sm text-gray-600">Parks Director</p>
-                        </div>
-                    </div>
-                    <div class="shadow-lg p-6 rounded-lg bg-white">
-                        <div class="flex gap-1 mb-4">
-                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                        </div>
-                        <p class="text-gray-700 mb-4 italic">"Professional, reliable, and creative. They listened to our needs and delivered a playground that our students absolutely love."</p>
-                        <div>
-                            <p class="font-semibold text-gray-900">Mike Chen</p>
-                            <p class="text-sm text-gray-600">School Principal</p>
-                        </div>
-                    </div>
-                     <div class="shadow-lg p-6 rounded-lg bg-white">
-                        <div class="flex gap-1 mb-4">
-                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-400"></i>
-                        </div>
-                        <p class="text-gray-700 mb-4 italic">"The playground they built in our neighborhood is amazing. My kids play there every day and I feel completely confident in its safety."</p>
-                        <div>
-                            <p class="font-semibold text-gray-900">Lisa Martinez</p>
-                            <p class="text-sm text-gray-600">Parent</p>
+                        <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 -mx-6 px-6">
+                            <div class="snap-center flex-shrink-0 w-[90%]">
+                                <div class="bg-blue-50 rounded-2xl p-6 shadow-lg h-full flex flex-col">
+                                    <div class="mb-4">
+                                        <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">Elementary</span>
+                                    </div>
+                                    <div class="mb-4 rounded-xl overflow-hidden">
+                                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=250&fit=crop" alt="Project" class="w-full h-48 object-cover"/>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-3">Angie Debo Elementary School Playground Project</h3>
+                                    <p class="text-gray-600 text-sm mb-4 leading-relaxed flex-grow">Custom ADA Accessible Play Structure in purple, teal and pacific blue.</p>
+                                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full font-semibold text-sm mt-auto transition-colors">Learn More</button>
+                                </div>
+                            </div>
+                            <div class="snap-center flex-shrink-0 w-[90%]">
+                                <div class="bg-blue-50 rounded-2xl p-6 shadow-lg h-full flex flex-col">
+                                    <div class="mb-4">
+                                        <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">City Parks</span>
+                                    </div>
+                                    <div class="mb-4 rounded-xl overflow-hidden">
+                                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=250&fit=crop" alt="Project" class="w-full h-48 object-cover"/>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-3">Basilio Villareal Park - Rio Grande City Park Project</h3>
+                                    <p class="text-gray-600 text-sm mb-4 leading-relaxed flex-grow">Bleachers and seating solutions with chainlink guardrails.</p>
+                                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full font-semibold text-sm mt-auto transition-colors">Learn More</button>
+                                </div>
+                            </div>
+                            <div class="snap-center flex-shrink-0 w-[90%]">
+                                <div class="bg-blue-50 rounded-2xl p-6 shadow-lg h-full flex flex-col">
+                                    <div class="mb-4">
+                                        <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">Community</span>
+                                    </div>
+                                    <div class="mb-4 rounded-xl overflow-hidden">
+                                        <img src="https://images.unsplash.com/photo-1541740242-0e60489f3c75?w=400&h=250&fit=crop" alt="Project" class="w-full h-48 object-cover"/>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-gray-800 mb-3">Westtown Community Park Upgrade</h3>
+                                    <p class="text-gray-600 text-sm mb-4 leading-relaxed flex-grow">Complete playground renovation featuring inclusive play elements.</p>
+                                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-full font-semibold text-sm mt-auto transition-colors">Learn More</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-white border-t border-gray-200">
+    <!-- Community Section -->
+    <section class="py-20 bg-gradient-to-r from-green-500 to-green-600 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6">What can we build together?</h2>
+                    <p class="text-xl text-green-100 mb-8 leading-relaxed">
+                        Every playground tells a story. Let us help you create a space where children can explore, imagine, 
+                        and grow together. From concept to completion, we're here to bring your vision to life.
+                    </p>
+                    <button class="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded font-semibold transition-colors">
+                        Start Your Project
+                    </button>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl transform -rotate-6"></div>
+                    <img 
+                        src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=500&h=400&fit=crop"
+                        alt="Children playing on playground"
+                        class="relative rounded-3xl shadow-2xl w-full h-80 object-cover"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Hear stories from our customers</h2>
+                <div class="flex justify-center items-center gap-2 mb-4">
+                    <div class="flex gap-1">
+                        <i data-lucide="star" class="w-5 h-5 star-filled"></i>
+                        <i data-lucide="star" class="w-5 h-5 star-filled"></i>
+                        <i data-lucide="star" class="w-5 h-5 star-filled"></i>
+                        <i data-lucide="star" class="w-5 h-5 star-filled"></i>
+                        <i data-lucide="star" class="w-5 h-5 star-filled"></i>
+                    </div>
+                    <span class="text-gray-600">5.0 stars from 150+ reviews</span>
+                </div>
+                <div class="flex justify-center items-center gap-8 mt-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png" alt="Google" class="h-8 opacity-60" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Facebook_f_logo_%282019%29.svg/100px-Facebook_f_logo_%282019%29.svg.png" alt="Facebook" class="h-8 opacity-60" />
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Yelp_Logo.svg/200px-Yelp_Logo.svg.png" alt="Yelp" class="h-8 opacity-60" />
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                    </div>
+                    <p class="text-gray-700 mb-4 italic">"Noah's Play transformed our community park into something truly special. The attention to detail and quality of work exceeded our expectations."</p>
+                    <div>
+                        <p class="font-semibold text-gray-900">Sarah Johnson</p>
+                        <p class="text-sm text-gray-600">Parks Director</p>
+                    </div>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                    </div>
+                    <p class="text-gray-700 mb-4 italic">"Professional, reliable, and creative. They listened to our needs and delivered a playground that our students absolutely love."</p>
+                    <div>
+                        <p class="font-semibold text-gray-900">Mike Chen</p>
+                        <p class="text-sm text-gray-600">School Principal</p>
+                    </div>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <div class="flex gap-1 mb-4">
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                        <i data-lucide="star" class="w-4 h-4 star-filled"></i>
+                    </div>
+                    <p class="text-gray-700 mb-4 italic">"The playground they built in our neighborhood is amazing. My kids play there every day and I feel completely confident in its safety."</p>
+                    <div>
+                        <p class="font-semibold text-gray-900">Lisa Martinez</p>
+                        <p class="text-sm text-gray-600">Parent</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white">
         <div class="bg-gray-100 border-b border-gray-200 py-8">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
-                    <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
-                        <i data-lucide="phone" class="w-8 h-8 text-[#0073aa]"></i>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <i data-lucide="phone" class="w-8 h-8 text-blue-700"></i>
                         <div>
-                            <h3 class="font-bold text-[#0073aa] text-lg">CALL US</h3>
+                            <h3 class="font-bold text-blue-700 text-lg">CALL US</h3>
                             <p class="text-sm text-gray-600">We are here to help</p>
                         </div>
                     </div>
-                    <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
-                        <i data-lucide="mail" class="w-8 h-8 text-[#0073aa]"></i>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <i data-lucide="mail" class="w-8 h-8 text-blue-700"></i>
                         <div>
-                            <h3 class="font-bold text-[#0073aa] text-lg">EMAIL US</h3>
+                            <h3 class="font-bold text-blue-700 text-lg">EMAIL US</h3>
                             <p class="text-sm text-gray-600">info@noahsplay.com</p>
                         </div>
                     </div>
-                    <div class="flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
-                        <i data-lucide="message-circle" class="w-8 h-8 text-[#0073aa]"></i>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <i data-lucide="message-circle" class="w-8 h-8 text-blue-700"></i>
                         <div>
-                            <h3 class="font-bold text-[#0073aa] text-lg">CONTACT US</h3>
+                            <h3 class="font-bold text-blue-700 text-lg">CONTACT US</h3>
                             <p class="text-sm text-gray-600">Send us a Message on Our Website</p>
                         </div>
                     </div>
@@ -336,7 +440,7 @@
             <div class="max-w-7xl mx-auto px-6">
                 <div class="grid md:grid-cols-4 gap-8 text-sm">
                     <div>
-                        <h3 class="font-bold text-[#0073aa] text-base mb-4">Noah's Info</h3>
+                        <h3 class="font-bold text-blue-700 text-base mb-4">Noah's Info</h3>
                         <div class="space-y-4 text-gray-700">
                             <div>
                                 <p>T: 877-248-54444</p>
@@ -348,53 +452,50 @@
                                 <p>Edmond, OK 73013</p>
                             </div>
                             <div class="space-y-2 pt-2">
-                                <p class="hover:text-[#0073aa] cursor-pointer">About Us</p>
-                                <p class="hover:text-[#0073aa] cursor-pointer">Work With Us</p>
+                                <p class="hover:text-blue-700 cursor-pointer">About Us</p>
+                                <p class="hover:text-blue-700 cursor-pointer">Work With Us</p>
                             </div>
                         </div>
                     </div>
-
                     <div>
-                        <h3 class="font-bold text-[#0073aa] text-base mb-4">Noah's Store</h3>
+                        <h3 class="font-bold text-blue-700 text-base mb-4">Noah's Store</h3>
                         <div class="space-y-2 text-gray-700">
-                            <p class="hover:text-[#0073aa] cursor-pointer">Products</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Brands</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Color Tool</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Purchasing Process</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Financing</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Warranties</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Your Privacy</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Shipment</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">FAQ</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Products</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Brands</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Color Tool</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Purchasing Process</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Financing</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Warranties</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Your Privacy</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Shipment</p>
+                            <p class="hover:text-blue-700 cursor-pointer">FAQ</p>
                         </div>
                     </div>
-
                     <div>
-                        <h3 class="font-bold text-[#0073aa] text-base mb-4">Noah's Work</h3>
+                        <h3 class="font-bold text-blue-700 text-base mb-4">Noah's Work</h3>
                         <div class="space-y-2 text-gray-700">
-                            <p class="hover:text-[#0073aa] cursor-pointer">Portfolio</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Services</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Design Help</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Installations</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Blog</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Testimonials</p>
-                            <p class="hover:text-[#0073aa] cursor-pointer">Grant Opportunities</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Portfolio</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Services</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Design Help</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Installations</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Blog</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Testimonials</p>
+                            <p class="hover:text-blue-700 cursor-pointer">Grant Opportunities</p>
                         </div>
                     </div>
-
                     <div>
-                        <h3 class="font-bold text-[#0073aa] text-base mb-4">Free Catalogue</h3>
+                        <h3 class="font-bold text-blue-700 text-base mb-4">Free Catalogue</h3>
                         <div class="space-y-2">
-                            <button class="w-full bg-[#0073aa] hover:bg-sky-700 text-white rounded-full text-xs px-4 py-2 h-auto">
+                            <button class="w-full bg-blue-700 hover:bg-blue-800 text-white rounded-full text-xs px-4 py-2 h-auto transition-colors">
                                 Request a Digital Catalog Packet
                             </button>
-                            <button class="w-full bg-[#0073aa] hover:bg-sky-700 text-white rounded-full text-xs px-4 py-2 h-auto">
+                            <button class="w-full bg-blue-700 hover:bg-blue-800 text-white rounded-full text-xs px-4 py-2 h-auto transition-colors">
                                 View Noah's Digital Catalog
                             </button>
                             <div class="flex items-center justify-start gap-4 pt-4">
-                                <img src="https://i.imgur.com/eBwG1P9.png" alt="ASTM Certified" class="h-8">
-                                <img src="https://i.imgur.com/hYdYgYf.png" alt="Certified Playground Safety Inspector" class="h-8">
-                                <img src="https://i.imgur.com/nJbQfXp.png" alt="NPCAI Member" class="h-8">
+                                <img src="https://i.imgur.com/eBwG1P9.png" alt="ASTM Certified" class="h-8" />
+                                <img src="https://i.imgur.com/hYdYgYf.png" alt="Certified Playground Safety Inspector" class="h-8" />
+                                <img src="https://i.imgur.com/nJbQfXp.png" alt="NPCAI Member" class="h-8" />
                             </div>
                         </div>
                     </div>
@@ -402,14 +503,265 @@
             </div>
         </div>
 
-        <div class="bg-[#0073aa] text-white py-4">
+        <div class="bg-blue-700 text-white py-4">
             <div class="max-w-7xl mx-auto px-6 text-center text-xs">
-                <p>&copy; 2025 Noahs Park and Playgrounds | info@noahsplay.com | Sitemap</p>
+                <p>© 2025 Noahs Park and Playgrounds | info@noahsplay.com | Sitemap | Core dna</p>
             </div>
         </div>
     </footer>
 
-    <!-- Link to your JavaScript file -->
-    <script src="main.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Menu data for all categories
+        const menuData = {
+            'Playgrounds': {
+                categories: [
+                    { title: "Playground Structures", items: ["Fitness Structures", "Inclusive Playground Equipment", "Indoor Playgrounds", "Shaded Structures", "Themed Structures", "Traditional & Fitness Combo Structures", "Traditional Post & Deck Structures"] },
+                    { title: "Playhouses & Fun Centers", items: [] },
+                    { title: "Slides", items: [] }
+                ],
+                products: [
+                    { id: 1, name: "1 Bashful Bluff Get Physical Structure", price: "$20,091.00", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop", isBusiness: true },
+                    { id: 2, name: "2 Denali Get Physical Structure", price: "$19,152.00", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=200&fit=crop", isBusiness: false }
+                ]
+            },
+            'Parks': {
+                categories: [
+                    { title: "Benches & Chairs", items: ["Metal Benches", "Metal With Plastic Coating Benches", "Plastic Benches", "Chairs"] },
+                    { title: "Tables", items: ["ADA Accessible Tables", "Children's Tables", "Metal Tables", "Plastic Tables"] },
+                    { title: "Dog Parks", items: ["Accessories", "Agility & Balance", "Jumps & Hoops", "Kits & Courses", "Signage", "Trash & Clean Up"] }
+                ],
+                products: [
+                    { id: 1, name: "6' Shaded Table", price: "Add to Quote to See Price", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop", isBusiness: false },
+                    { id: 2, name: "Simple Table", price: "$1,100.25", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=200&fit=crop", isBusiness: true }
+                ]
+            },
+            'Swings': {
+                categories: [
+                    { title: "Swing Sets", items: ["Adaptive Swings", "Arch Post Swings", "Cantilever Swings", "Shaded Swings", "Single Post Swings", "Tire & Nest Swings", "Tripod Swings"] },
+                    { title: "Swing Seats", items: [] }
+                ],
+                products: [
+                    { id: 1, name: "High-Capacity Single Post Adaptive Swing", price: "$2,094.00", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop", isBusiness: false },
+                    { id: 2, name: "High-Capacity Single Post Adaptive Swing", price: "$2,094.00", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=200&fit=crop", isBusiness: false }
+                ]
+            },
+            'Independent Play': {
+                categories: [
+                    { title: "Motion & Merry Go Rounds", items: [] },
+                    { title: "Climbers", items: ["Craggy & Rock Climbers", "Net & Rope Climbers", "Plastic & Rubber Climbers", "Traditional Metal Climbers"] }
+                ],
+                products: [
+                    { id: 1, name: "Safari Circle Steppers with 2\" Mats", price: "Add to Quote to See Price", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop", isBusiness: false },
+                    { id: 2, name: "NatureRocks Climbing Boulder - Small Granite", price: "Add to Quote to See Price", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=200&fit=crop", isBusiness: true }
+                ]
+            },
+            'Shade Structures': {
+                categories: [{ title: "Shade Options", items: ["Shade Structures", "Shaded Structures", "Shaded Swings"] }],
+                products: [
+                    { id: 1, name: "Pyramid Shade", price: "$11,531.00", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop", isBusiness: false },
+                    { id: 2, name: "Two Post Hip Shade", price: "$11,531.00", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=200&fit=crop", isBusiness: false }
+                ]
+            },
+            'Fitness Structures': {
+                categories: [{ title: "Outdoor Fitness", items: ["Double Stations", "Outdoor Fitness Courses", "Single Stations", "Triple/Quad Stations"] }],
+                products: [
+                    { id: 1, name: "Accessible Quadruple Gym Station", price: "$4,836.00", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop", isBusiness: false },
+                    { id: 2, name: "San Ramon Get Physical Structure", price: "$19,063.00", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=200&fit=crop", isBusiness: false }
+                ]
+            },
+            'Sports & Games': {
+                categories: [{ title: "Sports Equipment", items: ["Basketball", "Disc Golf", "Soccer/Lacrosse", "Tennis/Pickleball"] }],
+                products: [
+                    { id: 1, name: "4-Ring Basketball Stand with Storage Bag", price: "$531.00", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop", isBusiness: false },
+                    { id: 2, name: "Hopscotch Playground Activity Pad", price: "Add to Quote to See Price", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=200&fit=crop", isBusiness: false }
+                ]
+            },
+            'Site Safety': {
+                categories: [{ title: "Safety Surfacing", items: ["Surfacing", "Borders & Ramps", "Wear Mats"] }],
+                products: [
+                    { id: 1, name: "2 Pc Beveled Tire Swing Wear Mat", price: "Add to Quote to See Price", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop", isBusiness: false },
+                    { id: 2, name: "ADA Half Ramp for 8\" Timbers", price: "$475.00", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=200&fit=crop", isBusiness: false }
+                ]
+            },
+            'Replacement Parts': {
+                categories: [{ title: "Structure Replacement Parts", items: ["Structure Climber Parts", "Structure Deck Parts", "Structure Panel Parts", "Structure Roof Parts", "Structure Slide Parts"] }],
+                products: [
+                    { id: 1, name: "Infinity Cycle Pedal Replacement Parts", price: "$104.00", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=200&fit=crop", isBusiness: false },
+                    { id: 2, name: "Infinity Cycle Wheel & Pedal Replacement Parts", price: "$225.00", image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=200&fit=crop", isBusiness: false }
+                ]
+            }
+        };
+
+        // Projects data
+        const projects = [
+            {
+                title: "Angie Debo Elementary School Playground Project",
+                category: "Elementary",
+                description: "Custom ADA Accessible Play Structure in purple, teal and pacific blue. Structure components include 2 ADA ramps and stations with tic-tac-toe panel, clock panel and 2 bubble panel",
+                image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=250&fit=crop"
+            },
+            {
+                title: "Basilio Villareal Park - Rio Grande City Park Project",
+                category: "City Parks",
+                description: "Bleachers- (2) 5 row bleachers with 15\" non-elevated bleachers with chainlink guardrails, (5) 8 row bleachers with chainlink guardrails. Seating capacity 58 + 2 ADA, (2) 10 row bleacher with chainl...",
+                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=250&fit=crop"
+            },
+            {
+                title: "Westtown Community Park Upgrade",
+                category: "Community",
+                description: "Complete playground renovation featuring inclusive play elements, safety surfacing upgrades, and accessible pathways for children of all abilities to enjoy together.",
+                image: "https://images.unsplash.com/photo-1541740242-0e60489f3c75?w=400&h=250&fit=crop"
+            }
+        ];
+
+        let currentProject = 0;
+        let activeCategory = 'Playgrounds';
+        let dropdownTimeout;
+
+        // Category hover functionality
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                clearTimeout(dropdownTimeout);
+                const category = this.dataset.category;
+                showDropdown(category);
+                setActiveCategory(category);
+            });
+        });
+
+        document.querySelector('#main-header').addEventListener('mouseleave', function() {
+            dropdownTimeout = setTimeout(() => {
+                hideDropdown();
+            }, 300);
+        });
+
+        document.querySelector('#category-dropdown').addEventListener('mouseenter', function() {
+            clearTimeout(dropdownTimeout);
+        });
+
+        document.querySelector('#category-dropdown').addEventListener('mouseleave', function() {
+            hideDropdown();
+        });
+
+        function setActiveCategory(category) {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active', 'text-blue-600', 'font-semibold');
+                btn.classList.add('text-gray-700', 'font-medium');
+            });
+            
+            const activeBtn = document.querySelector(`[data-category="${category}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'text-blue-600', 'font-semibold');
+                activeBtn.classList.remove('text-gray-700', 'font-medium');
+            }
+            
+            activeCategory = category;
+        }
+
+        function showDropdown(category) {
+            const dropdown = document.getElementById('category-dropdown');
+            const data = menuData[category];
+            
+            if (!data) return;
+            
+            // Update title
+            document.getElementById('dropdown-title').textContent = category;
+            
+            // Update categories
+            const categoriesContainer = document.getElementById('dropdown-categories');
+            categoriesContainer.innerHTML = '';
+            
+            data.categories.forEach(cat => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.innerHTML = `
+                    <h4 class="font-bold text-gray-800 mb-3">${cat.title}</h4>
+                    <ul class="space-y-1 text-sm text-gray-600">
+                        ${cat.items.map(item => `<li><a href__="#" class="hover:text-blue-600">${item}</a></li>`).join('')}
+                    </ul>
+                `;
+                categoriesContainer.appendChild(categoryDiv);
+            });
+            
+            // Update products
+            const productsContainer = document.getElementById('dropdown-products');
+            productsContainer.innerHTML = '';
+            
+            data.products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'bg-blue-50/40 border border-gray-200 rounded-lg p-4 text-center';
+                productDiv.innerHTML = `
+                    <div class="aspect-w-3 aspect-h-2 mb-4 rounded-lg overflow-hidden relative">
+                        ${product.isBusiness ? '<span class="absolute top-2 left-2 bg-orange-500 text-white px-2 py-0.5 rounded-full text-xs font-semibold z-10">Business</span>' : ''}
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover"/>
+                    </div>
+                    <h4 class="font-bold text-gray-900 mb-2 leading-tight">${product.name}</h4>
+                    <p class="text-sm text-gray-600 mb-3">${product.price}</p>
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-md py-2 font-semibold transition-colors">Add to Cart</button>
+                `;
+                productsContainer.appendChild(productDiv);
+            });
+            
+            dropdown.classList.add('active');
+        }
+
+        function hideDropdown() {
+            document.getElementById('category-dropdown').classList.remove('active');
+        }
+
+        // Projects slider functionality
+        function createProjectSlide(project, index) {
+            return `
+                <div class="bg-blue-50 rounded-2xl p-8 shadow-lg flex-1">
+                    <div class="mb-4">
+                        <span class="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-semibold">${project.category}</span>
+                    </div>
+                    <div class="mb-6 rounded-xl overflow-hidden">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover"/>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">${project.title}</h3>
+                    <p class="text-gray-600 text-sm mb-6 leading-relaxed">${project.description}</p>
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full font-semibold transition-colors">Learn More</button>
+                </div>
+            `;
+        }
+
+        function updateProjectSlider() {
+            const container = document.getElementById('project-slides-desktop');
+            const slide1Index = currentProject;
+            const slide2Index = (currentProject + 1) % projects.length;
+            
+            container.innerHTML = `
+                ${createProjectSlide(projects[slide1Index], slide1Index)}
+                ${createProjectSlide(projects[slide2Index], slide2Index)}
+            `;
+        }
+
+        document.getElementById('next-project').addEventListener('click', function() {
+            currentProject = (currentProject + 1) % projects.length;
+            updateProjectSlider();
+        });
+
+        document.getElementById('prev-project').addEventListener('click', function() {
+            currentProject = (currentProject - 1 + projects.length) % projects.length;
+            updateProjectSlider();
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Initialize
+        showDropdown('Playgrounds');
+        updateProjectSlider();
+        
+        // Reinitialize Lucide icons after dynamic content
+        setTimeout(() => {
+            lucide.createIcons();
+        }, 100);
+    </script>
 </body>
 </html>
